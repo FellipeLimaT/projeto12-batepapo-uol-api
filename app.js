@@ -23,7 +23,7 @@ app.post("/participants", async (req, res) => {
     });
 
     const { name } = req.body;
-    const validation = participantSchema.validate(name, { abortEarly: false });
+    const validation = participantSchema.validate(req.body, { abortEarly: false });
 
     if (validation.error) {
         console.log(validation.error.details.map(detail => detail.message));
@@ -241,7 +241,7 @@ app.post("/status", async (req, res) => {
     }
 });
 
-/* setInterval(async () => {
+setInterval(async () => {
 
     const participantsCollection = db.collection('participants');
     const participants = await participantsCollection.find({}).toArray();
@@ -263,6 +263,6 @@ app.post("/status", async (req, res) => {
     } catch {
         console.log("Não atualizou os participantes ativos")
     }
-}, 15000); */
+}, 15000);
 
 app.listen(5000);
